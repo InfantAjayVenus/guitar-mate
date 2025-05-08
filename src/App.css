@@ -1,0 +1,35 @@
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.pulse {
+  animation: pulse 0.5s infinite;
+}
+
+.metronome-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.time-signature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .metronome-container {
+    padding: 1rem;
+  }
+  
+  .time-signature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
