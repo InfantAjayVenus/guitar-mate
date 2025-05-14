@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "danger": "danger ci"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -72,6 +73,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-istanbul": "*",
     "autoprefixer": "^10.4.20",
+    "danger": "^13.0.4",
     "globals": "^15.9.0",
     "happy-dom": "^14.4.1",
     "jsdom": "^24.0.1",
