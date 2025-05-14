@@ -10,14 +10,9 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    // Removed lucide-react from exclude to fix module resolution issues
   },
   build: {
     sourcemap: true,
-  },
-  test: {
-    globals: true,
-    environment: 'happy-dom',
-    setupFiles: './src/tests/setup.ts',
   }
 });
