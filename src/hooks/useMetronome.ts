@@ -23,15 +23,16 @@ export function useMetronome({ bpm, timeSignature, isPlaying }: UseMetronomeProp
     }
     
     while (nextBeatTimeRef.current && nextBeatTimeRef.current <= currentTime + 100) {
-      const nextBeat = (currentBeat % timeSignature) + 1;
-      const isFirstBeat = nextBeat === 1;
       
       // Schedule the beat to play at the exact time
       const timeTillNextBeat = nextBeatTimeRef.current - currentTime;
       
       setTimeout(() => {
-        setCurrentBeat(nextBeat);
-        playSound(isFirstBeat ? 'accent' : 'normal');
+        setCurrentBeat((prevBeat) => {
+          const nextBeat = (prevBeat % timeSignature) + 1;
+          playSound(nextBeat === 1 ? 'accent' : 'normal');
+          return nextBeat;
+        });
       }, Math.max(0, timeTillNextBeat));
       
       // Set the next beat time

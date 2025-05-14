@@ -26,9 +26,7 @@ const MetronomeVisualizer = ({
                 ? "border-primary" 
                 : "border-secondary",
               currentBeat === beat && isPlaying
-                ? beat === 1
-                  ? "bg-primary text-primary-foreground scale-110"
-                  : "bg-secondary text-secondary-foreground scale-110"
+                ? "bg-primary text-primary-foreground scale-110 "
                 : "bg-background scale-100"
             )}
           >
@@ -36,7 +34,7 @@ const MetronomeVisualizer = ({
             {currentBeat === beat && isPlaying && (
               <div 
                 className={cn(
-                  "absolute -inset-2 rounded-full z-0 animate-ping opacity-60",
+                  "absolute -inset-2 rounded-full z-0 animate-pulse opacity-40",
                   beat === 1 ? "bg-primary" : "bg-secondary"
                 )}
                 style={{ animationDuration: '0.5s' }}
