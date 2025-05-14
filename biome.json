@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/biome.json",
+  "extends": ["biome:recommended"],
+  "rules": {
+    "files": {
+      "ignore": ["dist/**"]
+    },
+    "lint": {
+      "no-unused-vars": "error",
+      "no-console": "warn",
+      "eqeqeq": ["error", "always"],
+      "curly": "error"
+    },
+    "typescript": {
+      "no-explicit-any": "error",
+      "explicit-function-return-type": "warn"
+    }
+  }
+}
