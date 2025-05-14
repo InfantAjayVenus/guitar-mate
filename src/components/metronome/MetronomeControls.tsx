@@ -1,15 +1,5 @@
-import { useState } from 'react';
-import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
-import { 
-  Play, 
-  Pause, 
-  Timer,
-  TimerOff,
-  Plus,
-  Minus,
-  Activity 
-} from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
 import {
   Tooltip,
   TooltipContent,
@@ -17,15 +7,25 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useTapTempo } from '@/hooks/useTapTempo';
+import {
+  Activity,
+  Minus,
+  Pause,
+  Play,
+  Plus,
+  Timer,
+  TimerOff
+} from 'lucide-react';
+import { useState, useEffect } from 'react';
 import TimeSignatureSelector from './TimeSignatureSelector';
 
 interface MetronomeControlsProps {
   bpm: number;
-  timeSignature: number;
+  timeSignature: { numerator: number; denominator: number };
   isPlaying: boolean;
   isTimerEnabled: boolean;
   onBpmChange: (bpm: number) => void;
-  onTimeSignatureChange: (timeSignature: number) => void;
+  onTimeSignatureChange: (timeSignature: { numerator: number; denominator: number }) => void;
   onPlayToggle: () => void;
   onTimerToggle: () => void;
 }
@@ -41,7 +41,14 @@ const MetronomeControls = ({
   onTimerToggle,
 }: MetronomeControlsProps) => {
   const [tapCount, setTapCount] = useState(0);
-  const { addTap, resetTaps, getTempo } = useTapTempo();
+  const { addTap, getTempo } = useTapTempo();
+
+  // Ensure a default time signature is set
+  useEffect(() => {
+    if (!timeSignature || !timeSignature.numerator || !timeSignature.denominator) {
+      onTimeSignatureChange({ numerator: 4, denominator: 4 }); // Default to 4/4
+    }
+  }, [timeSignature, onTimeSignatureChange]);
 
   const handleTapTempo = () => {
     addTap();
@@ -149,6 +156,7 @@ const MetronomeControls = ({
       <Button 
         className="w-full h-16 text-lg"
         onClick={onPlayToggle}
+        disabled={!timeSignature || !timeSignature.numerator || !timeSignature.denominator} // Disable if no time signature
       >
         {isPlaying ? (
           <>
@@ -166,4 +174,4 @@ const MetronomeControls = ({
   );
 };
 
-export default MetronomeControls
+export default MetronomeControls;

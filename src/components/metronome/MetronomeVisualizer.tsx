@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 
 interface MetronomeVisualizerProps {
   currentBeat: number;
-  timeSignature: number;
+  timeSignature: { numerator: number; denominator: number };
   isPlaying: boolean;
 }
 
@@ -11,8 +11,8 @@ const MetronomeVisualizer = ({
   timeSignature,
   isPlaying,
 }: MetronomeVisualizerProps) => {
-  // Create an array of beats based on the time signature
-  const beats = Array.from({ length: timeSignature }, (_, i) => i + 1);
+  // Use the numerator of the time signature to determine the number of beats
+  const beats = Array.from({ length: timeSignature.numerator }, (_, i) => i + 1);
 
   return (
     <div className="w-full mb-8">
@@ -26,20 +26,11 @@ const MetronomeVisualizer = ({
                 ? "border-primary" 
                 : "border-secondary",
               currentBeat === beat && isPlaying
-                ? "bg-primary text-primary-foreground scale-110 "
+                ? `${beat === 1 ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"} scale-110`
                 : "bg-background scale-100"
             )}
           >
             <span className="text-lg font-medium">{beat}</span>
-            {currentBeat === beat && isPlaying && (
-              <div 
-                className={cn(
-                  "absolute -inset-2 rounded-full z-0 animate-pulse opacity-40",
-                  beat === 1 ? "bg-primary" : "bg-secondary"
-                )}
-                style={{ animationDuration: '0.5s' }}
-              />
-            )}
           </div>
         ))}
       </div>
