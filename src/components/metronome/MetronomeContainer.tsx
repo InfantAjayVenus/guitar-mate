@@ -21,8 +21,7 @@ const MetronomeContainer = ({
   onPlayToggle,
 }: MetronomeContainerProps) => {
   const [bpm, setBpm] = useState(100);
-  const [timeSignature, setTimeSignature] = useState(4);
-  const [activeTab, setActiveTab] = useState('metronome');
+  const [timeSignature, setTimeSignature] = useState<{ numerator: number; denominator: number }>({ numerator: 4, denominator: 4 });
 
   const { currentBeat, setIsPlaying } = useMetronome({
     bpm,
@@ -55,13 +54,13 @@ const MetronomeContainer = ({
     setBpm(newBpm);
   };
 
-  const handleTimeSignatureChange = (newTimeSignature: number) => {
+  const handleTimeSignatureChange = (newTimeSignature: { numerator: number; denominator: number }) => {
     setTimeSignature(newTimeSignature);
   };
 
   return (
     <Card className="w-full max-w-3xl shadow-xl">
-      <Tabs defaultValue="metronome" className="w-full" onValueChange={setActiveTab}>
+      <Tabs defaultValue="metronome" className="w-full">
         <TabsList className="w-full grid grid-cols-2">
           <TabsTrigger value="metronome">Metronome</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
