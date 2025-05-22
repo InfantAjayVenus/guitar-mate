@@ -63,14 +63,9 @@ jobs:
         env:
           # If the repository is a project repository (username.github.io/repo), set the base path to the repo name
           BASE_URL: ${{ github.event.repository.name }}
-      - name: Ensure upload-artifact is available
-        uses: actions/upload-artifact@v3
-        with:
-          name: dummy
-          path: ./dummy
-          if-no-files-found: ignore 
+          
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
   
