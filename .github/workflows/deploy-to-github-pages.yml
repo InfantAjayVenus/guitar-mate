@@ -63,7 +63,8 @@ jobs:
         env:
           # If the repository is a project repository (username.github.io/repo), set the base path to the repo name
           BASE_URL: ${{ github.event.repository.name }}
-          
+      - name: List dist contents
+        run: ls -l ./dist 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
