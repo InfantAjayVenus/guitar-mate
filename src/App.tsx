@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import Layout from '@/components/layout/Layout';
 import MetronomeContainer from '@/components/metronome/MetronomeContainer';
+import { UpdateNotification } from '@/components/pwa/UpdateNotification';
+import { InstallPrompt } from '@/components/pwa/InstallPrompt';
+import { Toaster } from '@/components/ui/toaster';
 import './App.css';
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
           onTimerToggle={toggleTimerEnabled}
           onPlayToggle={togglePlaying}
         />
+        <UpdateNotification />
+        <InstallPrompt />
+        <Toaster />
       </Layout>
     </ThemeProvider>
   );

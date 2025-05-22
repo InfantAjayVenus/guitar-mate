@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build", 
+    "build": "vite build",
     "build:types": "tsc -b && vite build",
     "build:pages": "BASE_URL=guitar-mate vite build",
+    "build:pwa": "vite build",
     "preview:pages": "BASE_URL=guitar-mate vite preview --host",
+    "preview:pwa": "npm run build:pwa && vite preview --host",
+    "generate-icons": "node generate-icons.js",
+    "setup:pwa": "node setup-pwa.js",
     "lint": "biome lint",
     "format": "biome format",
     "preview": "vite preview",
@@ -84,9 +88,11 @@
     "husky": "^9.1.7",
     "jsdom": "^24.0.1",
     "postcss": "^8.4.47",
+    "pwa-asset-generator": "^8.0.5",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.5.3",
     "vite": "^5.4.8",
+    "vite-plugin-pwa": "^1.0.0",
     "vitest": "^3.1.3"
   }
 }
