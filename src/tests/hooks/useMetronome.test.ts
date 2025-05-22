@@ -5,6 +5,7 @@ import { useMetronome } from '@/hooks/useMetronome';
 // Mock the audioUtils
 vi.mock('@/lib/audioUtils', () => ({
   playSound: vi.fn(),
+  stopSound: vi.fn(),
 }));
 
 describe('useMetronome', () => {
@@ -20,7 +21,7 @@ describe('useMetronome', () => {
 
   it('should initialize with currentBeat set to 0', () => {
     const { result } = renderHook(() => 
-      useMetronome({ bpm: 100, timeSignature: 4, isPlaying: false })
+      useMetronome({ bpm: 100, timeSignature: { numerator: 4, denominator: 4 }, isPlaying: false })
     );
     
     expect(result.current.currentBeat).toBe(0);
@@ -28,7 +29,7 @@ describe('useMetronome', () => {
 
   it('should keep currentBeat at 0 when not playing', () => {
     const { result } = renderHook(() => 
-      useMetronome({ bpm: 100, timeSignature: 4, isPlaying: false })
+      useMetronome({ bpm: 100, timeSignature: { numerator: 4, denominator: 4 }, isPlaying: false })
     );
     
     expect(result.current.currentBeat).toBe(0);
@@ -43,7 +44,7 @@ describe('useMetronome', () => {
 
   it('should set isPlaying state correctly', () => {
     const { result } = renderHook(() => 
-      useMetronome({ bpm: 100, timeSignature: 4, isPlaying: false })
+      useMetronome({ bpm: 100, timeSignature: { numerator: 4, denominator: 4 }, isPlaying: false })
     );
     
     expect(result.current.currentBeat).toBe(0);
