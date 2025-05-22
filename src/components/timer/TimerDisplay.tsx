@@ -32,8 +32,8 @@ const TimerDisplay = ({ time, onReset, onTimeSet, className }: TimerDisplayProps
   };
 
   return (
-    <Card className={cn("p-4", className)}>
-      <div className="flex items-center gap-4">
+    <Card className={cn("p-1 md:p-4", className)}>
+      <div className="flex items-center gap-1 md:gap-4">
         <Clock className="h-5 w-5 text-muted-foreground" />
         <div className="flex gap-2 items-center flex-1">
           <Input
