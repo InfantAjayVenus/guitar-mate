@@ -10,7 +10,7 @@ describe('useTimer', () => {
     vi.spyOn(Date, 'now').mockImplementation(() => currentTime);
     
     // Helper to advance the mock time
-    global.advanceTime = (ms: number) => {
+    (global as any).advanceTime = (ms: number) => {
       currentTime += ms;
       vi.advanceTimersByTime(ms);
     };
@@ -83,5 +83,36 @@ describe('useTimer', () => {
     
     // Time should still be 1000 as the timer is paused
     expect(result.current.time).toBe(1000);
+  });
+  
+  it('should call onTimerEnd when timer reaches zero', () => {
+    const onTimerEnd = vi.fn();
+    const { result } = renderHook(() => 
+      useTimer({ 
+        isRunning: true, 
+        initialTime: 2000, 
+        onTimerEnd 
+      })
+    );
+    
+    // First tick
+    act(() => {
+      (global as any).advanceTime(1000);
+    });
+    expect(result.current.time).toBe(1000);
+    expect(onTimerEnd).not.toHaveBeenCalled();
+    
+    // Second tick reaches zero
+    act(() => {
+      (global as any).advanceTime(1000);
+    });
+    expect(result.current.time).toBe(0);
+    expect(onTimerEnd).toHaveBeenCalledTimes(1);
+    
+    // No more calls after reaching zero
+    act(() => {
+      (global as any).advanceTime(1000);
+    });
+    expect(onTimerEnd).toHaveBeenCalledTimes(1);
   });
 });
