@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Mate - Offline</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 500px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        button {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #4338ca;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+        }
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        .feature-text {
+            margin: 0;
+        }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+        </svg>
+        <h1>You're offline</h1>
+        <p>It looks like you're not connected to the internet right now. Guitar Mate requires an internet connection to load initially, but once loaded, it works offline.</p>
+        
+        <div class="features">
+            <div class="feature">
+                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                    <path d="M9 13h6"></path>
+                    <path d="M12 10v6"></path>
+                </svg>
+                <p class="feature-text">Install Guitar Mate as a PWA for the best offline experience</p>
+            </div>
+            <div class="feature">
+                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                </svg>
+                <p class="feature-text">Once installed, Guitar Mate works even when you're offline</p>
+            </div>
+        </div>
+        
+        <button onclick="window.location.reload()">Try Again</button>
+        
+        <footer>
+            Guitar Mate v1.0 | &copy; 2025
+        </footer>
+    </div>
+    
+    <script>
+        // Check if we're online and redirect to home if we are
+        window.addEventListener('online', function() {
+            window.location.href = '/';
+        });
+        
+        // Try to reconnect periodically
+        setInterval(function() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
