@@ -29,9 +29,24 @@ const MetronomeContainer = ({
     isPlaying,
   });
 
+  // Handle timer end by stopping the metronome
+  const handleTimerEnd = () => {
+    console.log("Timer ended, stopping metronome. isPlaying:", isPlaying);
+    
+    // Directly stop the metronome through the hook
+    setIsPlaying(false);
+    
+    // Also update the parent component state
+    if (isPlaying) {
+      console.log("Calling onPlayToggle to update parent state");
+      onPlayToggle(); // This will toggle isPlaying to false in the parent component
+    }
+  };
+
   const { time, resetTimer, setInitialTime } = useTimer({
     isRunning: isPlaying && isTimerEnabled,
     initialTime: 300000, // 5 minutes default
+    onTimerEnd: handleTimerEnd, // Pass the callback to stop when timer ends
   });
 
   useEffect(() => {
